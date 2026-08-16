@@ -1,0 +1,246 @@
+:root {
+  color-scheme: light;
+  --paper: #f4efe7;
+  --paper-soft: #faf7f2;
+  --ink: #1f211d;
+  --ink-soft: #5f625b;
+  --line: rgba(31, 33, 29, 0.16);
+  --cobalt: #2449a8;
+  --cobalt-deep: #18377f;
+  --clay: #d9775f;
+  --butter: #eddb73;
+  --sage: #b7c7ad;
+  --white: #fffdf9;
+  --success: #356a48;
+  --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, Baskerville, Georgia, serif;
+  --font-sans: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --shadow-sm: 0 14px 40px rgba(47, 42, 34, 0.09);
+  --shadow-lg: 0 30px 90px rgba(47, 42, 34, 0.16);
+  --radius-sm: 10px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+  --page: min(1440px, calc(100vw - 64px));
+  font-family: var(--font-sans);
+  font-synthesis: none;
+  line-height: 1.5;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 104px;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+body,
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button,
+a,
+input,
+textarea,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+select {
+  cursor: pointer;
+}
+
+button {
+  color: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+::selection {
+  background: var(--butter);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 3px solid var(--cobalt);
+  outline-offset: 4px;
+}
+
+.skip-link {
+  position: fixed;
+  z-index: 1000;
+  top: 10px;
+  left: 10px;
+  padding: 10px 16px;
+  transform: translateY(-150%);
+  border-radius: 999px;
+  background: var(--ink);
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.button {
+  display: inline-flex;
+  min-height: 50px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 22px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-size: 0.83rem;
+  font-weight: 750;
+  letter-spacing: 0.045em;
+  line-height: 1;
+  transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease, color 180ms ease;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+}
+
+.button--primary {
+  background: var(--cobalt);
+  color: white;
+  box-shadow: 0 10px 24px rgba(36, 73, 168, 0.22);
+}
+
+.button--primary:hover {
+  background: var(--cobalt-deep);
+  box-shadow: 0 14px 30px rgba(36, 73, 168, 0.28);
+}
+
+.button--dark {
+  background: var(--ink);
+  color: white;
+}
+
+.button--ghost {
+  border-color: var(--line);
+  background: rgba(255, 255, 255, 0.24);
+}
+
+.button--ghost:hover {
+  border-color: var(--ink);
+  background: var(--white);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 20px;
+  color: var(--cobalt-deep);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.eyebrow::before {
+  width: 28px;
+  height: 1px;
+  background: currentColor;
+  content: "";
+}
+
+.display-title {
+  font-family: var(--font-display);
+  font-size: clamp(3.2rem, 7vw, 7.8rem);
+  font-weight: 400;
+  letter-spacing: -0.055em;
+  line-height: 0.89;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 4.7vw, 5.4rem);
+  font-weight: 400;
+  letter-spacing: -0.045em;
+  line-height: 0.98;
+}
+
+.page-shell {
+  width: var(--page);
+  margin-inline: auto;
+}
+
+@media (max-width: 760px) {
+  :root {
+    --page: min(100% - 32px, 680px);
+  }
+
+  html {
+    scroll-padding-top: 80px;
+  }
+
+  .display-title {
+    font-size: clamp(3rem, 16vw, 5rem);
+  }
+
+  .section-title {
+    font-size: clamp(2.4rem, 12vw, 4rem);
+  }
+
+  .button {
+    min-height: 48px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
