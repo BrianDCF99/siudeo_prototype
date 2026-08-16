@@ -55,9 +55,6 @@ export function HomePage() {
           <div className="page-shell trust-strip__inner">
             {studioFacts.map((fact) => (
               <div className="trust-strip__fact" key={fact}>
-                <span className="trust-strip__icon" aria-hidden="true">
-                  <Icon name="check" size={14} />
-                </span>
                 <span>{fact}</span>
               </div>
             ))}
