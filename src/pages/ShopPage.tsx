@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState, type CSSProperties } from 'react'
 
+import { Icon } from '../components/Icon'
 import { ProductCard } from '../components/ProductCard'
 import { SiteFooter, SiteHeader } from '../components/SiteChrome'
 import { products, type Product } from '../data/site'
@@ -35,6 +36,7 @@ export function ShopPage() {
   const [collection, setCollection] = useState<CollectionFilter>(initialCollectionFilter)
   const [priceLimit, setPriceLimit] = useState(maximumPrice)
   const [sort, setSort] = useState<SortOption>('default')
+  const [filtersOpen, setFiltersOpen] = useState(false)
 
   const visibleProducts = useMemo(() => {
     const filtered = products.filter((product) => {
@@ -97,56 +99,73 @@ export function ShopPage() {
         <section className="shop-catalog page-shell" aria-labelledby="shop-title">
           <aside className="shop-filters" aria-label="Shop filters">
             <div className="shop-filters__heading">
-              <h2>Filter</h2>
-              {hasActiveFilters && (
-                <button type="button" onClick={clearFilters}>
-                  Clear
+              <h2>Filters</h2>
+              <div className="shop-filters__actions">
+                {hasActiveFilters && (
+                  <button className="shop-filters__clear" type="button" onClick={clearFilters}>
+                    Clear
+                  </button>
+                )}
+                <button
+                  className="shop-filters__toggle"
+                  type="button"
+                  aria-controls="shop-filter-controls"
+                  aria-expanded={filtersOpen}
+                  onClick={() => setFiltersOpen((isOpen) => !isOpen)}
+                >
+                  <span className="sr-only">{filtersOpen ? 'Hide filters' : 'Show filters'}</span>
+                  <Icon className="shop-filters__chevron" name="chevron-down" size={20} />
                 </button>
-              )}
+              </div>
             </div>
 
-            <fieldset className="shop-filter-group shop-collection-filter">
-              <legend>Collection</legend>
-              <div className="shop-filter-options">
-                {collectionOptions.map((option) => (
-                  <label className="shop-filter-option" key={option.value}>
-                    <input
-                      type="radio"
-                      name="collection"
-                      value={option.value}
-                      checked={collection === option.value}
-                      onChange={() => setCollection(option.value)}
-                    />
-                    <span>{option.label}</span>
-                  </label>
-                ))}
-              </div>
-            </fieldset>
+            <div
+              className={`shop-filters__body${filtersOpen ? ' shop-filters__body--open' : ''}`}
+              id="shop-filter-controls"
+            >
+              <fieldset className="shop-filter-group shop-collection-filter">
+                <legend>Collection</legend>
+                <div className="shop-filter-options">
+                  {collectionOptions.map((option) => (
+                    <label className="shop-filter-option" key={option.value}>
+                      <input
+                        type="radio"
+                        name="collection"
+                        value={option.value}
+                        checked={collection === option.value}
+                        onChange={() => setCollection(option.value)}
+                      />
+                      <span>{option.label}</span>
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
 
-            <fieldset className="shop-filter-group shop-price-filter">
-              <legend>Price</legend>
-              <div className="shop-price-slider">
-                <div className="shop-price-slider__value">
-                  <span>Up to</span>
-                  <output htmlFor="maximum-price">${priceLimit}</output>
+              <fieldset className="shop-filter-group shop-price-filter">
+                <legend>Price</legend>
+                <div className="shop-price-slider">
+                  <div className="shop-price-slider__value">
+                    <span>Up to</span>
+                    <output htmlFor="maximum-price">${priceLimit}</output>
+                  </div>
+                  <input
+                    id="maximum-price"
+                    type="range"
+                    min={minimumPrice}
+                    max={maximumPrice}
+                    step={priceStep}
+                    value={priceLimit}
+                    aria-label="Maximum price"
+                    style={{ '--slider-fill': sliderFill } as CSSProperties}
+                    onChange={(event) => setPriceLimit(Number(event.target.value))}
+                  />
+                  <div className="shop-price-slider__bounds" aria-hidden="true">
+                    <span>${minimumPrice}</span>
+                    <span>${maximumPrice}</span>
+                  </div>
                 </div>
-                <input
-                  id="maximum-price"
-                  type="range"
-                  min={minimumPrice}
-                  max={maximumPrice}
-                  step={priceStep}
-                  value={priceLimit}
-                  aria-label="Maximum price"
-                  style={{ '--slider-fill': sliderFill } as CSSProperties}
-                  onChange={(event) => setPriceLimit(Number(event.target.value))}
-                />
-                <div className="shop-price-slider__bounds" aria-hidden="true">
-                  <span>${minimumPrice}</span>
-                  <span>${maximumPrice}</span>
-                </div>
-              </div>
-            </fieldset>
+              </fieldset>
+            </div>
           </aside>
 
           <div className="shop-results">

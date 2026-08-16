@@ -60,7 +60,13 @@
   letter-spacing: -0.025em;
 }
 
-.shop-filters__heading button {
+.shop-filters__actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.shop-filters__clear {
   padding: 2px 0;
   border: 0;
   border-bottom: 1px solid currentColor;
@@ -70,6 +76,14 @@
   font-weight: 750;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+}
+
+.shop-filters__toggle {
+  display: none;
+}
+
+.shop-filters__body {
+  display: contents;
 }
 
 .shop-filter-group {
@@ -366,6 +380,46 @@
   .shop-filters {
     display: block;
     padding: 21px;
+  }
+
+  .shop-filters__heading {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  .shop-filters__heading h2 {
+    font-size: 1.4rem;
+  }
+
+  .shop-filters__toggle {
+    display: inline-grid;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    place-items: center;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--ink);
+  }
+
+  .shop-filters__chevron {
+    transition: transform 180ms ease;
+  }
+
+  .shop-filters__toggle[aria-expanded="true"] .shop-filters__chevron {
+    transform: rotate(180deg);
+  }
+
+  .shop-filters__body {
+    display: none;
+    padding-top: 18px;
+    margin-top: 10px;
+    border-top: 1px solid var(--line);
+  }
+
+  .shop-filters__body--open {
+    display: block;
   }
 
   .shop-filter-group + .shop-filter-group {
