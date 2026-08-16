@@ -909,6 +909,10 @@
     border-top: 1px solid var(--line);
   }
 
+  .trust-strip__fact:nth-child(4) {
+    border-right: 0;
+  }
+
   .announcement {
     min-height: 28px;
   }
@@ -1124,11 +1128,12 @@
   }
 }
 
-@media (hover: none) {
+@media (hover: none), (pointer: coarse) {
   .product-card__image--detail {
     display: none;
   }
 
+  .product-card:hover .product-card__image--main,
   .product-card:focus-within .product-card__image--main {
     opacity: 1;
     transform: none;

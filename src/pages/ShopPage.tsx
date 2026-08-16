@@ -105,7 +105,7 @@ export function ShopPage() {
               )}
             </div>
 
-            <fieldset className="shop-filter-group">
+            <fieldset className="shop-filter-group shop-collection-filter">
               <legend>Collection</legend>
               <div className="shop-filter-options">
                 {collectionOptions.map((option) => (
