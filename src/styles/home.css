@@ -893,6 +893,22 @@
     --storefront-heading-size: clamp(1.5rem, 7vw, 3rem);
   }
 
+  .trust-strip {
+    border-block: 0;
+  }
+
+  .trust-strip__fact {
+    border: 0;
+  }
+
+  .trust-strip__fact:nth-child(even) {
+    border-left: 1px solid var(--line);
+  }
+
+  .trust-strip__fact:nth-child(n + 3) {
+    border-top: 1px solid var(--line);
+  }
+
   .announcement {
     min-height: 28px;
   }
